@@ -58,6 +58,8 @@ const watch = (main_path) => {
 
         const [podname, namespace, cotainer] = fileInfo.split('_');
         // ? Insert log to mongodb
+        console.log(`Pod logs inserted ${podname}`);
+
         insertLog({log: logum, podname, namespace, cotainer, node: nodeInfo()});
 
         // ? Change file size
