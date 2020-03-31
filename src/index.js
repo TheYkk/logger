@@ -7,7 +7,7 @@ const env = require('./getenv');
 
 init({
   connectionUrl: env('MONGO_URI', ''),
-  dbName: env('MONGO_DB', ''),
+  dbName: env('MONGO_DB', 'logger'),
 }).then(() => {
   watch(env('LOG_PATH', '/var/lib/containers'));
 });

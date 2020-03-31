@@ -11,7 +11,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
-
+secret.yaml
 # For project
 src/senders/config.json
 # Diagnostic reports (https://nodejs.org/api/report.html)
