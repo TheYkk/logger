@@ -1,0 +1,5 @@
+2020-03-31T15:24:40.282006506+03:00 stdout F {"level":20,"time":1585657480281,"pid":1,"hostname":"randomlogger","name":"auth-ms","user":0.4291793035570419,"err":"An error is usually an exception that hass been caught and not handled."}
+2020-03-31T15:24:40.282006506+03:00 stdout F {"level":20,"time":1585657480281,"pid":1,"hostname":"randomlogger","name":"auth-ms","user":0.4291793035570419,"err":"An error is usually an exception that hass been caught and not handled."}
+2020-03-28T12:14:09.400776608+03:00 stdout F 192.168.0.22 - - [28/Mar/2020:09:14:09 +0000] "GET /harbor/replications/9/tasks HTTP/2.0" 200 411 "-" "Mozilla/5.0 (X11; Li
+2020-03-28T12:14:09.400776608+03:00 stdout F 192.168.0.22 - - [28/Mar/2020:09:14:09 +0000] "GET /harbor/replications/9/tasks HTTP/2.0" 200 411 "-" "Mozilla/5.0 (X11; Li
+2020-03-28T12:14:09.400776608+03:00 stdout F 192.168.0.22 - - [28/Mar/2020:09:14:09 +0000] "GET /harbor/replications/9/tasks HTTP/2.0" 200 411 "-" "Mozilla/5.0 (X11; Li
