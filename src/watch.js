@@ -27,6 +27,9 @@ const watch = (main_path) => {
   console.log(`Watching ${main_path}`);
   chokidar.watch(main_path).on('all', (event, path, stats) => {
     if (event == 'add') {
+
+      console.log(`Added path ${path}`);
+
       file_stats[path] = stats.size;
     }
     if (event == 'change') {

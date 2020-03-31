@@ -9,5 +9,5 @@ init({
   connectionUrl: env('MONGO_URI', ''),
   dbName: env('MONGO_DB', 'logger'),
 }).then(() => {
-  watch(env('LOG_PATH', '/var/lib/containers/'));
+  watch(env('LOG_PATH', '/var/log/containers/'));
 });
