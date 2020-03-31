@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 const chokidar = require('chokidar');
 
 const fs = require('fs');
@@ -8,6 +9,7 @@ const os = require('os');
 
 const file_stats = {};
 
+// ? Regex for applications ref: https://github.com/fluent/fluent-bit/blob/master/conf/parsers.conf
 const regexes = [
   /^(?<host>[^ ]*) - (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*?)(?: +\S*)?)?" (?<code>[^ ]*) (?<size>[^ ]*) "(?<referer>[^\"]*)" "(?<agent>[^\"]*)" (?<request_length>[^ ]*) (?<request_time>[^ ]*) \[(?<proxy_upstream_name>[^ ]*)\] (\[(?<proxy_alternative_upstream_name>[^ ]*)\] )?(?<upstream_addr>[^ ]*) (?<upstream_response_length>[^ ]*) (?<upstream_response_time>[^ ]*) (?<upstream_status>[^ ]*) (?<reg_id>[^ ]*).*$/,
   /^(?<type>\S+) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>(?:[^\"]|\\.)*?)(?: +\S*)?) (?<protocol>\S+)?" (?<response_code>\S+) (?<response_flags>\S+) (?<bytes_received>\S+) (?<bytes_sent>\S+) (?<duration>\S+) (?<x_envoy_upstream_service_time>\S+) "(?<x_forwarded_for>[^\"]*)" "(?<user_agent>[^\"]*)" "(?<x_request_id>[^\"]*)" "(?<authority>[^\"]*)" "(?<upstream_host>[^\"]*)"/,
@@ -77,7 +79,6 @@ const watch = (main_path) => {
         // ? Remove new line
         const final = getjson.replace(/(\r\n|\n|\r)/gm, '');
 
-        // console.log(final);
         let logum;
         try {
           logum = JSON.parse(final);
