@@ -30,9 +30,4 @@ const insertLog = (log) => {
   return collection.insertOne(log);
 };
 
-const getlogs = () => {
-  const collection = db.collection('logs');
-  return collection.find({}).toArray();
-};
-
-module.exports = {init, insertLog, getlogs};
+module.exports = {init, insertLog};
