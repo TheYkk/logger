@@ -1,7 +1,7 @@
 {
   "name": "logger",
   "description": "K8S log centralization tool",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "main": "src/index.js",
   "repository": {
     "type": "git",
