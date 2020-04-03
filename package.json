@@ -1,8 +1,19 @@
 {
-  "name": "js",
+  "name": "logger",
+  "description": "K8S log centralization tool",
   "version": "0.0.6",
-  "main": "index.js",
-  "license": "MIT",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theykk/logger.git"
+  },
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
   "dependencies": {
     "chokidar": "^3.3.1",
     "dotenv": "^8.2.0",
