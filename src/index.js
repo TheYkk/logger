@@ -1,4 +1,4 @@
-// ? Db coonector
+// ? Db conector
 const {init} = require('./db');
 const {watch} = require('./watch');
 
