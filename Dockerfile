@@ -21,6 +21,7 @@ RUN yarn install --prod
 # Push js files
 FROM node:12-alpine
 WORKDIR /usr/src/app
+LABEL maintainer="Kaan Karakaya <yusufkaan142@gmail.com>"
 COPY --from=builder /usr/src/app/node_modules /usr/src/app/node_modules
 COPY ./src ./src
 CMD node src/index.js
