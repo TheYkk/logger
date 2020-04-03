@@ -90,6 +90,7 @@ const watch = (main_path) => {
         // ? Remove timestampts etc.
         const getjson = split_file.slice(3, split_file.length).join(' ');
 
+        // TODO Parse new line
         // ? Remove new line
         const final = getjson.replace(/(\r\n|\n|\r)/gm, '');
 

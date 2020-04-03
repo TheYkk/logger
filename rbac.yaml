@@ -3,32 +3,42 @@ kind: Namespace
 metadata:
   name: logger
 ---
-apiVersion: v1
-kind: ServiceAccount
+apiVersion: extensions/v1beta1
+kind: PodSecurityPolicy
 metadata:
   name: theykk-logger
   namespace: logger
+spec:
+  allowPrivilegeEscalation: true
+  fsGroup:
+    rule: RunAsAny
+  hostNetwork: true
+  privileged: true
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  volumes: ['*']
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: theykk-logger-read
-rules:
-- apiGroups: [""]
-  resources:
-  - namespaces
-  - pods
-  verbs: ["get", "list", "watch"]
----
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: theykk-logger-read
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: theykk-logger-read
-subjects:
-- kind: ServiceAccount
   name: theykk-logger
   namespace: logger
+rules:
+- apiGroups: ['*']
+  resources:
+  - pods
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - extensions
+  resourceNames:
+  - theykk-logger
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
