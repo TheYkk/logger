@@ -3,17 +3,16 @@ kind: Namespace
 metadata:
   name: logger
 ---
-apiVersion: extensions/v1beta1
+apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
   name: theykk-logger
   namespace: logger
 spec:
-  allowPrivilegeEscalation: true
   fsGroup:
     rule: RunAsAny
   hostNetwork: true
-  privileged: true
+  privileged: false
   runAsUser:
     rule: RunAsAny
   seLinux:
