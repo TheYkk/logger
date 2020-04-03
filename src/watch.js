@@ -94,17 +94,19 @@ const watch = (main_path) => {
 
         const fileInfo = fileName(path);
 
-        const [podname, namespace, cotainer] = fileInfo.split('_');
+        const [pod, namespace, cotainer] = fileInfo.split('_');
         // ? Insert log to mongodb
-        console.log(`Pod logs inserted ${podname}`);
+        console.log(`Pod logs inserted ${pod}`);
 
         insertLog({
           log: logum,
-          podname,
+          pod,
           namespace,
-          cotainer,
+          cotainer: cotainer.split('-')[0],
+          cotainerId: cotainer.split('-')[1].substring(0, 12),
           node: nodeInfo(),
           time: new Date().toISOString(),
+          tags: 'k8s',
         });
 
         // ? Change file size
