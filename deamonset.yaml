@@ -4,22 +4,15 @@ metadata:
   name: theykk-logger
   namespace: logger
   labels:
-    k8s-app: theykk-logger-logging
-    version: v1
-    kubernetes.io/cluster-service: "true"
+    app: theykk-logger
 spec:
   selector:
     matchLabels:
-      name: theykk-logger
+      app: theykk-logger
   template:
     metadata:
       labels:
-        name: theykk-logger
-        k8s-app: theykk-logger-logging
-        version: v1
-        kubernetes.io/cluster-service: "true"
-      annotations:
-        prometheus.io/scrape: "false"
+        app: theykk-logger
     spec:
       containers:
       - name: theykk-logger
@@ -37,7 +30,6 @@ spec:
         - name: varlibdockercontainers
           mountPath: /var/lib/docker/containers
           readOnly: true
-      terminationGracePeriodSeconds: 10
       volumes:
       - name: varlog
         hostPath:
@@ -45,7 +37,6 @@ spec:
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers
-      serviceAccountName: theykk-logger
       tolerations:
       - key: node-role.kubernetes.io/master
         operator: Exists
@@ -54,3 +45,7 @@ spec:
         effect: "NoExecute"
       - operator: "Exists"
         effect: "NoSchedule"
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
