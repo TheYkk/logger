@@ -1,7 +1,7 @@
 {
   "name": "logger",
   "description": "K8S log centralization tool",
-  "version": "0.1.0",
+  "version": "v0.2.6",
   "main": "src/index.js",
   "repository": {
     "type": "git",
@@ -15,9 +15,9 @@
     }
   ],
   "dependencies": {
-    "chokidar": "^3.3.1",
+    "chokidar": "^3.4.2",
     "dotenv": "^8.2.0",
-    "mongodb": "^3.5.5"
+    "mongodb": "^3.6.2"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
