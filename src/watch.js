@@ -125,6 +125,7 @@ const watch = (main_path) => {
             logTime: new Date(split_file[0]).toISOString(),
             writer: split_file[1],
             tags: 'k8s',
+            raw: getjson,
           });
         });
 
