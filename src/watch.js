@@ -113,7 +113,7 @@ const watch = (main_path) => {
           const [pod, namespace, cotainer] = fileInfo.split('_');
           // ? Insert log to mongodb
           console.log(`Pod logs inserted ${pod}`);
-          console.log(split_file);
+
           insertLog({
             log: logum,
             pod,
