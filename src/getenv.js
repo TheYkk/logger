@@ -77,7 +77,7 @@ GetEnv.getvalue = (varName, fallback) => {
   return value;
 };
 
-Object.keys(convert).forEach(type => {
+Object.keys(convert).forEach((type) => {
   GetEnv[type] = (varName, fallback) => {
     return convert[type](GetEnv.getvalue(varName, fallback));
   };
