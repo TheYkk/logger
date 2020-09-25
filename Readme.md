@@ -19,8 +19,18 @@
 [![dockeri.co](https://dockeri.co/image/theykk/logger)](https://hub.docker.com/r/theykk/logger)
 
 # TheYkk K8S Logger
+
 This tool runs a pod at every node in K8s via deamonset.
 The pod connects node's /var/log/containers folder and adds to mongodb by collecting logs
+
+![Parse](./log1.png)
+
+Supports 25 Parsers
+
+![Parse](./log2.png)
+Average log size ~ 700 byte
+
+![Parse](./log3.png)
 
 ## Installation
 
@@ -49,6 +59,7 @@ and push the docker hub
 ```sh
 docker push theykk/logger
 ```
+
 ## Author
 
 👤 **TheYkk &lt;Kaan Karakaya yusufkaan142@gmail.com&gt;**
@@ -61,4 +72,5 @@ docker push theykk/logger
 Give a ⭐️ if this project helped you!
 
 ## License
+
 [APACHE](https://choosealicense.com/licenses/apache-2.0/)
