@@ -88,6 +88,7 @@ const watch = (main_path) => {
         const lines = changed_line.split('\n');
 
         lines.forEach((line) => {
+          if (line.length < 10) return;
           //* Example log: 2020-09-08T11:34:47.881738667+03:00 stdout F [2020/09/08 08:34:47] [logger.go:490] mapping path "/dev/null" => file system "/dev/null"
           const split_file = line.split(' ');
 
@@ -112,7 +113,7 @@ const watch = (main_path) => {
           const [pod, namespace, cotainer] = fileInfo.split('_');
           // ? Insert log to mongodb
           console.log(`Pod logs inserted ${pod}`);
-
+          console.log(split_file);
           insertLog({
             log: logum,
             pod,
