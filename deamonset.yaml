@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: theykk-logger
-        image: theykk/logger:v0.2.1
+        image: theykk/logger:v0.2.5
         imagePullPolicy: Always
         env:
         - name: MONGO_URI
