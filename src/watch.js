@@ -71,6 +71,7 @@ const watch = (main_path) => {
           const fileInfo = fileName(path);
 
           const [pod, namespace, containerRaw] = fileInfo.split('_');
+          const conta = containerRaw.split('-');
           // ? Insert log to mongodb
           console.log(`Pod logs inserted ${pod}`);
 
@@ -78,8 +79,8 @@ const watch = (main_path) => {
             log: logum,
             pod,
             namespace,
-            container: containerRaw.split('-')[0],
-            containerId: containerRaw.split('-')[1].substring(0, 12),
+            container: conta.slice(0, conta.length - 1).join('-'),
+            containerId: conta.slice(conta.length - 1)[0].substring(0, 12),
             node: nodeInfo(),
             time: new Date().toISOString(),
             logTime: new Date(split_file[0]).toISOString(),
