@@ -1,3 +1,4 @@
+/* eslint-disable no-control-regex */
 /* eslint-disable prettier/prettier */
 // ? Regex for applications ref: https://github.com/fluent/fluent-bit/blob/master/conf/parsers.conf
 
@@ -13,6 +14,7 @@ const regexes = {
   apache2:                /^(?<host>[^ ]*) [^ ]* (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^ ]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^"]*)" "(?<agent>.*)")?$/,
   'syslog-rfc3164':       /^<(?<pri>[0-9]+)>(?<time>[^ ]* {1,2}[^ ]* [^ ]*) (?<host>[^ ]*) (?<ident>[a-zA-Z0-9_/.-]*)(?:\[(?<pid>[0-9]+)\])?(?:[^:]*:)? *(?<message>.*)$/,
   'syslog-rfc5424':       /^<(?<pri>[0-9]{1,5})>1 (?<time>[^ ]+) (?<host>[^ ]+) (?<ident>[^ ]+) (?<pid>[-0-9]+) (?<msgid>[^ ]+) (?<extradata>(\[(.*)\]|-)) (?<message>.+)$/,
+  prometheus:             /^level=(?<level>[^ ]*) ts=(?<time>[^ ]*) caller=(?<caller>[^ ].*) component=(?<component>[^ ].*) msg="(?<msg>[^ ].*)" key=(?<key>[^ ].*)/,
   mysql_error:            /^(?<log_time>[^ +][-\d]+[ T]*[:\dZ]+)\s*(?<myid>[^ ]\d+)\s+\[(?<severity>[^ ]\w+)\](\s+(?<subsystem>[^ ]\w+):){0,1}\s+(?<message>.*)$/,
   'syslog-rfc3164-local': /^<(?<pri>[0-9]+)>(?<time>[^ ]* {1,2}[^ ]* [^ ]*) (?<ident>[a-zA-Z0-9_/.-]*)(?:\[(?<pid>[0-9]+)\])?(?:[^:]*:)? *(?<message>.*)$/,
   pacemaker:              /^\s*(?<log_time>[^ ]* {1,2}[^ ]* [^ ]*) \[(?<pid>\d+)\] (?<node>[-\w]*)\s*(?<component>\w*):\s+(?<severity>\w+):\s+(?<message>.*)$/,
@@ -39,6 +41,9 @@ module.exports = {
       logum = JSON.parse(line);
       logum.parser = 'json';
     } catch (_err) {
+
+      // ? Remove color codes from line
+      line = line.replace(/\x1b\[[0-9;]*m/g,'');
       // ? Parsers
       const regexs = Object.keys(regexes);
       for (let i = 0; i < regexs.length; i += 1) {
