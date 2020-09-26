@@ -1,0 +1,1 @@
+2020-09-26T08:00:17Z [INFO] [/pkg/notifier/notifier.go:204]: Handle notification with topic 'PULL_ARTIFACT': &event.PullArtifactEvent{ArtifactEvent:(*event.ArtifactEvent)(0xc000254af0)}
