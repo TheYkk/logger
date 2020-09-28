@@ -16,19 +16,22 @@ const chokidar = require('chokidar');
 
 const fs = require('fs');
 
-const {insertLog} = require('./db');
+// ? Env helper
+const env = require('./getenv');
+
+const {insertLog, loadPaths, savePaths} = require('./db');
 const {parse} = require('./parser');
 
 const os = require('os');
 
-const file_stats = {};
+let file_stats = {};
 
 const fileName = (path) => {
   return path.split('\\').pop().split('/').pop().slice(0, -4);
 };
 
 const nodeInfo = () => {
-  const hostname = fs.readFileSync('/etc/hostname', 'utf8').split(/\n/g)[0];
+  const hostname = env('KUBE_HOSTNAME', '');
   return {
     uptime: os.uptime(),
     cpus: os.cpus().length,
@@ -39,13 +42,26 @@ const nodeInfo = () => {
 };
 
 const watch = (main_path) => {
+  // ? Load path sizes from mongo
+  loadPaths().then((p) => {
+    console.log(p);
+    if (p) {
+      file_stats = p;
+    }
+  });
+
   console.log(`Watching ${main_path}`);
   chokidar.watch(main_path).on('all', (event, path, stats) => {
     if (path.indexOf('theykk-logger') >= 0) return;
 
     if (event == 'add') {
       console.log(`Added path ${path}`);
-      file_stats[path] = stats.size;
+
+      //* If file new save to object and mongodb
+      if (!file_stats[path]) {
+        file_stats[path] = stats.size;
+        savePaths(file_stats);
+      }
     }
     if (event == 'change') {
       fs.readFile(path, (err, data) => {
@@ -91,6 +107,7 @@ const watch = (main_path) => {
 
         // ? Change file size
         file_stats[path] = stats.size;
+        savePaths(file_stats);
       });
     }
   });
