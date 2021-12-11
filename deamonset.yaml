@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: theykk-logger
-        image: theykk/logger:v0.2.6
+        image: theykk/logger:v0.2.16
         imagePullPolicy: Always
         env:
         - name: MONGO_URI
@@ -24,6 +24,10 @@ spec:
             secretKeyRef:
               name: theykk-logger
               key: MONGO_URI
+        - name: KUBE_HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
         resources:
           requests:
             cpu: 50m
@@ -42,7 +46,3 @@ spec:
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers
-  updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 100%
